@@ -11,19 +11,19 @@ const appReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isLoggedIn: true,
-                adminInfo: action.adminInfo
+                userInfo: action.userInfo
             }
-        case actionTypes.ADMIN_LOGIN_FAIL:
+        case actionTypes.USER_LOGIN_FAIL:
             return {
                 ...state,
                 isLoggedIn: false,
-                adminInfo: null
+                userInfo: null
             }
         case actionTypes.PROCESS_LOGOUT:
             return {
                 ...state,
                 isLoggedIn: false,
-                adminInfo: null
+                userInfo: null
             }
         default:
             return state;
