@@ -12,4 +12,16 @@ const getAllUsers = (id) => {
     return axios.get(`/api/get-all-users?id= ${id}`);
 }
 
-export { handleLoginApi, getAllUsers };
+const createNewUser = (user) => {
+    return axios.post('/api/create-new-user', {
+        user
+    });
+}
+
+const deleteUser = (id) => {
+    return axios.post('/api/delete-user', {
+        id
+    });
+}
+
+export { handleLoginApi, getAllUsers, createNewUser, deleteUser };
