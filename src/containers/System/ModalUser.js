@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import { createNewUser} from '../../services/userService';
+import { createNewUser } from '../../services/userService';
 
 class ModalUser extends Component {
 
@@ -27,28 +27,41 @@ class ModalUser extends Component {
     }
 
     toggle = () => {
-        this.props.toggleModal();
+        this.props.handleToggle();
     }
 
     onHandleDataForm = (event) => {
-        console.log(event.target.name);
-        console.log(event.target.value);
         this.setState({
             userData: {
                 ...this.state.userData,
                 [event.target.name]: event.target.value,
             }
+        }, () => {
+            console.log(this.state.userData);
         });
     }
 
-    onHandleSubmitForm = () => {
-        createNewUser(this.state.userData);
-        this.toggle();
+    checkValidateInput = () => {
+        let isValid = true;
+        let arrInput = ['firstName', 'lastName', 'gender', 'roleId', 'address', 'phonenumber', 'email', 'password'];
+        for (let i = 0; i < arrInput.length; i++) {
+            if (!this.state.userData[arrInput[i]]) {
+                isValid = false;
+                alert('Missing parameter ' + arrInput[i]);
+                break;
+            }
+        }
+        return isValid;
     }
 
+    onHandleSubmitForm = () => {
+        if (this.checkValidateInput()) {
+            this.props.handleAddNewUser(this.state.userData);
+            this.toggle();
+        }
+    }
 
     render() {
-
         return (
             <Modal isOpen={this.props.isOpen} toggle={() => { this.toggle() }} className={"Del biet"} size={this.props.size} centered>
                 <ModalHeader toggle={() => { this.toggle() }}>Create new user</ModalHeader>

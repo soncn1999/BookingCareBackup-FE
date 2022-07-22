@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import './UserManage.scss';
-import { getAllUsers, deleteUser } from '../../services/userService';
+import { getAllUsers, deleteUser, createNewUser } from '../../services/userService';
 import ModalUser from './ModalUser';
 
 class UserManage extends Component {
@@ -23,6 +23,15 @@ class UserManage extends Component {
      */
 
     async componentDidMount() {
+        // let response = await getAllUsers('ALL');
+        // console.log('get User from DB', response);
+        // if (response && response.errCode === 0) {
+        //     this.setState({ arrUsers: response.users });
+        // }
+        this.handleGetAllUsers();
+    }
+
+    handleGetAllUsers = async () => {
         let response = await getAllUsers('ALL');
         console.log('get User from DB', response);
         if (response && response.errCode === 0) {
@@ -30,14 +39,26 @@ class UserManage extends Component {
         }
     }
 
-    handleAddNewUser = () => {
-        this.setState({
-            isOpenModal: !this.state.isOpenModal,
-        })
+    handleAddNewUser = async (user) => {
+        try {
+            let response = await createNewUser(user);
+            alert(response.message);
+            this.handleGetAllUsers();
+        } catch (error) {
+            console.error(error);
+        }
     }
 
-    handleDeleteUser = (id) => { 
-        deleteUser(id);
+    handleToggle = () => {
+        this.setState({
+            isOpenModal: !this.state.isOpenModal,
+        });
+    }
+
+    handleDeleteUser = async (id) => {
+        let response = await deleteUser(id);
+        console.log(response.message);
+        this.handleGetAllUsers();
     }
 
     render() {
@@ -46,11 +67,12 @@ class UserManage extends Component {
             <div className="container">
                 <ModalUser
                     isOpen={this.state.isOpenModal}
-                    toggleModal={this.handleAddNewUser}
+                    handleToggle={this.handleToggle}
+                    handleAddNewUser={this.handleAddNewUser}
                     size="lg"
                 />
                 <h3 className="container-title mt-4">List Users</h3>
-                <button className="btn btn-primary px-3 mt-2" onClick={() => this.handleAddNewUser()}>Add New User</button>
+                <button className="btn btn-primary px-3 mt-2" onClick={() => this.handleToggle()}>Add New User</button>
                 <table id="customers" className="mt-4 mr-5 ml-5">
                     <tr>
                         <th>fistName</th>
