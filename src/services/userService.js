@@ -19,9 +19,7 @@ const createNewUser = (user) => {
 }
 
 const deleteUser = (id) => {
-    return axios.post('/api/delete-user', {
-        id
-    });
+    return axios.delete(`/api/delete-user?id=${id}`);
 }
 
 export { handleLoginApi, getAllUsers, createNewUser, deleteUser };
