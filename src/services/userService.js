@@ -9,7 +9,7 @@ const handleLoginApi = (email, password) => {
 }
 
 const getAllUsers = (id) => {
-    return axios.get(`/api/get-all-users?id= ${id}`);
+    return axios.get(`/api/get-all-users?id=${id}`);
 }
 
 const createNewUser = (user) => {
@@ -19,7 +19,17 @@ const createNewUser = (user) => {
 }
 
 const deleteUser = (id) => {
-    return axios.delete(`/api/delete-user?id=${id}`);
+    return axios.delete(`/api/delete-user`, {
+        data: {
+            id
+        }
+    });
 }
 
-export { handleLoginApi, getAllUsers, createNewUser, deleteUser };
+const updateUser = (user) => {
+    return axios.put('/api/edit-user', {
+        user
+    });
+}
+
+export { handleLoginApi, getAllUsers, createNewUser, deleteUser, updateUser };
