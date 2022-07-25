@@ -5,17 +5,26 @@ import './HomeHeader.scss';
 import { initMessageListener } from 'redux-state-sync';
 
 class HomeHeader extends Component {
-    
+
     constructor(props) {
         super(props);
         this.state = {
             isOpenSidebar: false,
+            isVi: true,
         };
     }
 
     toggleSidebar = () => {
         this.setState({
             isOpenSidebar: !this.state.isOpenSidebar,
+        }, () => {
+            console.log(this.state.isOpenSidebar);
+        });
+    }
+
+    switchLanguages = (choose = true) => {
+        this.setState({
+            isVi: choose,
         }, () => {
             console.log(this.state.isOpenSidebar);
         });
@@ -66,12 +75,12 @@ class HomeHeader extends Component {
         ];
 
         return (
-            <div className="container">
+            <div className="booking-container">
                 <div className="header">
                     <div className="sidebar-logo">
                         <div className="sidebar">
                             <i className="fa-solid fa-bars sidebar__icon" onClick={() => this.toggleSidebar()}></i>
-                            <div className="sidebar__container" style={this.state.isOpenSidebar ? {"display": "block"} : {"display": "none"}}>
+                            <div className="sidebar__container" style={this.state.isOpenSidebar ? { "display": "block" } : { "display": "none" }}>
                                 <ul className="sidebar__list">
                                     <li className="sidebar__item sidebar__item--border-top"><a href="">Trang chủ</a></li>
                                     <li className="sidebar__item"><a href="">Cẩm nang</a></li>
@@ -136,10 +145,27 @@ class HomeHeader extends Component {
                             <a href="">Hỗ trợ</a>
                         </span>
                     </div>
+
+                    <div className="language">
+                        <div className="language-title">
+                            <span>Ngôn ngữ:</span> &nbsp;
+                            <b>{this.state.isVi ? 'VI' : 'EN'}</b>
+                        </div>
+                        <ul className='language-list'>
+                            <li className="language-item" onClick={() => this.switchLanguages(true)}>
+                                <span>Vietnam</span>
+                                <div className="language-vi"></div>
+                            </li>
+                            <li className="language-item" onClick={() => this.switchLanguages(false)}>
+                                <span>England</span>
+                                <div className="language-en"></div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div className="sidebar__overlay" 
-                onClick={() => this.toggleSidebar()}
-                style={this.state.isOpenSidebar ? {"display": "block"} : {"display": "none"}}></div>
+                <div className="sidebar__overlay"
+                    onClick={() => this.toggleSidebar()}
+                    style={this.state.isOpenSidebar ? { "display": "block" } : { "display": "none" }}></div>
                 <div className="banner">
                     <div className="banner-title">
                         <p>Nền tảng y tế </p>
