@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import HomeHeader from './HomeHeader';
 import '../../assets/fontawesome-free-6.1.1-web/css/all.css';
+import Specialty from './Section/Specialty';
 
 class Homepage extends Component {
 
@@ -11,6 +12,7 @@ class Homepage extends Component {
         return (
             <div>
                 <HomeHeader />
+                <Specialty />
             </div>
         );
     }
