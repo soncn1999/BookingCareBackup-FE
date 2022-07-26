@@ -3,9 +3,11 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './HomeHeader.scss';
 import { initMessageListener } from 'redux-state-sync';
+import { FormattedMessage } from 'react-intl';
+import { LANGUAGES } from '../../utils';
+import { changeLanguageApp } from '../../store/actions';
 
 class HomeHeader extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -22,54 +24,60 @@ class HomeHeader extends Component {
         });
     }
 
-    switchLanguages = (choose = true) => {
-        this.setState({
-            isVi: choose,
-        }, () => {
-            console.log(this.state.isOpenSidebar);
-        });
+    switchLanguages = (language) => {
+        //fire redux event : action 
+        this.props.changeLanguageAppRedux(language); //trigger firing an action
+        if (language === 'vi') {
+            this.setState({
+                isVi: true,
+            })
+        } else {
+            this.setState({
+                isVi: false,
+            })
+        }
     }
 
     render() {
         let arrMedicalExamine = [
             {
                 id: 1,
-                title: 'Khám chuyên khoa',
+                title: <FormattedMessage id="banner.specialized-examination" />,
                 url: '',
             },
             {
                 id: 2,
-                title: 'Khám từ xa',
+                title: <FormattedMessage id="banner.remote-examination" />,
                 url: '',
             },
             {
                 id: 3,
-                title: 'Khám tổng quát',
+                title: <FormattedMessage id="banner.general-examination" />,
                 url: '',
             },
             {
                 id: 4,
-                title: 'Xét nghiệm y học',
+                title: <FormattedMessage id="banner.medical-test" />,
                 url: '',
             },
             {
                 id: 5,
-                title: 'Sức khỏe tinh thần',
+                title: <FormattedMessage id="banner.mental-health" />,
                 url: '',
             },
             {
                 id: 6,
-                title: 'Khám nha khoa',
+                title: <FormattedMessage id="banner.dental-examination" />,
                 url: '',
             },
             {
                 id: 7,
-                title: 'Gói phẫu thuật',
+                title: <FormattedMessage id="banner.surgery-pack" />,
                 url: '',
             },
             {
                 id: 8,
-                title: 'Sản phẩm y tế',
+                title: <FormattedMessage id="banner.medical-products" />,
                 url: '',
             },
         ];
@@ -109,55 +117,69 @@ class HomeHeader extends Component {
                     <div className="navbar">
                         <div className="navbar-item">
                             <div className="navbar-item__title">
-                                <a href="#">Chuyên khoa</a>
+                                <a href="#">
+                                    <FormattedMessage id="homeheader.specialty" />
+                                </a>
                             </div>
                             <div className="navbar-item__subtitle">
-                                Tìm bác sĩ theo chuyên khoa
+                                <FormattedMessage id="homeheader.find-doctor" />
                             </div>
                         </div>
 
                         <div className="navbar-item">
                             <div className="navbar-item__title">
-                                <a href="#"> Cơ sở y tế</a>
+                                <a href="#">
+                                    <FormattedMessage id="homeheader.medical-facility" />
+                                </a>
                             </div>
                             <div className="navbar-item__subtitle">
-                                Chọn bệnh viện phòng khám
+                                <FormattedMessage id="homeheader.choose-hospital-clinic" />
                             </div>
                         </div>
 
                         <div className="navbar-item">
                             <div className="navbar-item__title">
-                                <a href="#">Bác sĩ</a>
+                                <a href="#">
+                                    <FormattedMessage id="homeheader.doctor" />
+                                </a>
                             </div>
-                            <div className="navbar-item__subtitle">Chọn bác sĩ giỏi</div>
+                            <div className="navbar-item__subtitle">
+                                <FormattedMessage id="homeheader.choose-doctor" />
+                            </div>
                         </div>
 
                         <div className="navbar-item">
                             <div className="navbar-item__title">
-                                <a href="#"> Gói khám</a>
+                                <a href="#">
+                                    <FormattedMessage id="homeheader.medical-examination-combo" />
+                                </a>
                             </div>
-                            <div className="navbar-item__subtitle">Khám sức khỏe tổng quát</div>
+                            <div className="navbar-item__subtitle">
+                                <FormattedMessage id="homeheader.general-health-examination" />
+                            </div>
                         </div>
                     </div>
                     <div className="contact">
                         <i className="fa-solid fa-question contact__icon"></i>
                         <span className="contact__title">
-                            <a href="">Hỗ trợ</a>
+                            <a href="">
+                                <FormattedMessage id="homeheader.contact-support" />
+                            </a>
                         </span>
                     </div>
 
                     <div className="language">
                         <div className="language-title">
-                            <span>Ngôn ngữ:</span> &nbsp;
+                            <span><FormattedMessage id="homeheader.language" />:</span> &nbsp;
                             <b>{this.state.isVi ? 'VI' : 'EN'}</b>
                         </div>
                         <ul className='language-list'>
-                            <li className="language-item" onClick={() => this.switchLanguages(true)}>
-                                <span>Vietnam</span>
+                            <li className="language-item" >
+                                <span onClick={() => this.switchLanguages(LANGUAGES.VI)}>Vietnam</span>
                                 <div className="language-vi"></div>
                             </li>
-                            <li className="language-item" onClick={() => this.switchLanguages(false)}>
-                                <span>England</span>
+                            <li className="language-item" >
+                                <span onClick={() => this.switchLanguages(LANGUAGES.EN)}>England</span>
                                 <div className="language-en"></div>
                             </li>
                         </ul>
@@ -168,8 +190,12 @@ class HomeHeader extends Component {
                     style={this.state.isOpenSidebar ? { "display": "block" } : { "display": "none" }}></div>
                 <div className="banner">
                     <div className="banner-title">
-                        <p>Nền tảng y tế </p>
-                        <b>chăm sóc sức khỏe toàn diện</b>
+                        <p>
+                            <FormattedMessage id="banner.title1" />
+                        </p>
+                        <b>
+                            <FormattedMessage id="banner.title2" />
+                        </b>
                     </div>
                     <div className="banner-search">
                         <div className="banner-search__input">
@@ -179,7 +205,11 @@ class HomeHeader extends Component {
                                         <i className="fa-solid fa-magnifying-glass"></i>
                                     </button>
                                 </div>
-                                <input type="text" className="form-control banner-search__input-form" placeholder="Tìm lý do khám" aria-label=""
+
+                                <input type="text"
+                                    className="form-control banner-search__input-form"
+                                    placeholder={<FormattedMessage id="banner.search-palaceholder" />}
+                                    aria-label=""
                                     aria-describedby="basic-addon1" />
                             </div>
                         </div>
@@ -221,12 +251,14 @@ class HomeHeader extends Component {
 
 const mapStateToProps = state => {
     return {
-        isLoggedIn: state.user.isLoggedIn
+        isLoggedIn: state.user.isLoggedIn,
+        language: state.app.language,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+        changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language)), //fire an action
     };
 };
 
