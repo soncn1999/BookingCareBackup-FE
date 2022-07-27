@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import './Specialty.scss';
+import './MedicalFacility.scss';
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-class Specialty extends Component {
+class MedicalFacility extends Component {
 
     render() {
         let settings = {
@@ -19,10 +19,10 @@ class Specialty extends Component {
         };
 
         return (
-            <div className="section">
+            <div className="section section--background-color">
                 <div className="section-content">
                     <div className="section-heading">
-                        <div className="section-title">Chuyên khoa phổ biến</div>
+                        <div className="section-title">Cơ sở y tế nổi bật</div>
                         <button className="section-heading__btn">
                             Xem thêm
                         </button>
@@ -31,31 +31,45 @@ class Specialty extends Component {
                     <Slider {...settings}>
                         <div className="section-content__wrapper">
                             <div className="section-content__img-customize img-customize--size"></div>
-                            <a href="" className="section-content__title">Tai Mũi Họng</a>
+                            <a href="" className="section-content__title">
+                                Bệnh viện Hữu nghị Việt Đức
+                            </a>
                         </div>
                         <div className="section-content__wrapper">
                             <div className="section-content__img-customize img-customize--size"></div>
-                            <a href="" className="section-content__title">Cột sống</a>
+                            <a href="" className="section-content__title">
+                                Bệnh viện Chợ Rẫy
+                            </a>
                         </div>
                         <div className="section-content__wrapper">
                             <div className="section-content__img-customize img-customize--size"></div>
-                            <a href="" className="section-content__title">Y học Cổ truyền</a>
+                            <a href="" className="section-content__title">
+                                Phòng khám Bệnh viện Đại học Y Dược 1
+                            </a>
                         </div>
                         <div className="section-content__wrapper">
                             <div className="section-content__img-customize img-customize--size"></div>
-                            <a href="" className="section-content__title">Châm cứu</a>
+                            <a href="" className="section-content__title">
+                                Bệnh viện K - Cơ sở Phan Chu Trinh
+                            </a>
                         </div>
                         <div className="section-content__wrapper">
                             <div className="section-content__img-customize img-customize--size"></div>
-                            <a href="" className="section-content__title">Sản Phụ khoa</a>
+                            <a href="" className="section-content__title">
+                                Bệnh viện Ung bướu Hưng Việt
+                            </a>
                         </div>
                         <div className="section-content__wrapper">
                             <div className="section-content__img-customize img-customize--size"></div>
-                            <a href="" className="section-content__title">Siêu âm thai</a>
+                            <a href="" className="section-content__title">
+                                Hệ thống Y tế Thu Cúc TCI
+                            </a>
                         </div>
                         <div className="section-content__wrapper">
                             <div className="section-content__img-customize img-customize--size"></div>
-                            <a href="" className="section-content__title">Nhi khoa</a>
+                            <a href="" className="section-content__title">
+                                Phòng khám Đa khoa Saigon Healthcare
+                            </a>
                         </div>
                     </Slider>
                 </div>
@@ -75,4 +89,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Specialty);
+export default connect(mapStateToProps, mapDispatchToProps)(MedicalFacility);
