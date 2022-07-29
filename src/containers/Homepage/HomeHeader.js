@@ -208,7 +208,7 @@ class HomeHeader extends Component {
 
                                 <input type="text"
                                     className="form-control banner-search__input-form"
-                                    placeholder={<FormattedMessage id="banner.search-palaceholder" />}
+                                    placeholder= {this.state.isVi ? "Tìm bệnh viện" : "Search Hospitals"}
                                     aria-label=""
                                     aria-describedby="basic-addon1" />
                             </div>
