@@ -1,0 +1,43 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+    &__header {
+        display: flex;
+    }
+}
+
+.preview-img-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.preview-img__title {
+    text-align: center;
+    display: block;
+}
+
+.preview-img__btn {
+    padding: 10px;
+    font-size: 1.5rem;
+    width: 25%;
+}
+
+.preview-image {
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    margin: auto;
+}
+
+.label-preview {
+    margin-top: 10px !important;
+    background-color: #f7d800;
+    border-radius: 10px;
+    display: flex;
+    cursor: pointer;
+    margin: auto;
+    padding: 10px 15px;
+    &:hover {
+        color: #fff;
+    }
+}

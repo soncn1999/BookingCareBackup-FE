@@ -32,4 +32,8 @@ const updateUser = (user) => {
     });
 }
 
-export { handleLoginApi, getAllUsers, createNewUser, deleteUser, updateUser };
+const getAllCode = (dataType) => {
+    return axios.get(`/api/allcode?type=${dataType}`);
+}
+
+export { handleLoginApi, getAllUsers, createNewUser, deleteUser, updateUser, getAllCode };
