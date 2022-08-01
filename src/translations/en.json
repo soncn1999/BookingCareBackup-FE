@@ -65,6 +65,7 @@
         "position": "Position",
         "image": "Avatar",
         "submit": "Submit",
+        "edit": "Save Edit",
         "upload-avatar": "Upload Avatar"
     }
 }
