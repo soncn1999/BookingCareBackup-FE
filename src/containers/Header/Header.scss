@@ -13,11 +13,26 @@
         line-height: 40px;
         height: 40px;
         padding: 0 10px;
+        margin-left: 10px;
         &:hover {
             background-color: darken($colormain, 5);
         }
         i {
             font-size: $base-size + 1px;
+            line-height: 39px;
         }
+    }
+}
+
+.languages {
+    cursor: pointer;
+    &-vi {
+
+    }
+    &-en {
+
+    }
+    &-active {
+        color: #f7d800;
     }
 }

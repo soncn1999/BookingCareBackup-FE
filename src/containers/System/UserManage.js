@@ -120,8 +120,15 @@ class UserManage extends Component {
                     />
                 }
 
-                <h3 className="container-title mt-4">List Users</h3>
-                <button className="btn btn-primary px-3 mt-2" onClick={() => this.handleToggle()}>Add New User</button>
+                <h3 className="container-title mt-4">
+                    <i className="fas fa-list-ol"></i> &nbsp;
+                    List Users &nbsp;
+                    <i className="fas fa-list-ol"></i> 
+                </h3>
+                <button className="btn btn-primary px-3 mt-2" onClick={() => this.handleToggle()}>
+                    <i className="fas fa-user-plus"></i> &nbsp;
+                    Add New User
+                </button>
                 <table id="customers" className="mt-4 mr-5 ml-5">
                     <tr>
                         <th>fistName</th>
@@ -138,8 +145,14 @@ class UserManage extends Component {
                             <td>{user.email}</td>
                             <td>{user.address}</td>
                             <td>
-                                <button className="btn btn-primary button-space" onClick={() => this.handleEditUser(user)}>Edit</button>
-                                <button className="btn btn-danger button-space" onClick={() => this.handleDeleteUser(user)}>Delete</button>
+                                <button className="btn btn-primary button-space" onClick={() => this.handleEditUser(user)}>
+                                    <i className="fas fa-edit"></i> &nbsp;
+                                    Edit
+                                </button>
+                                <button className="btn btn-danger button-space" onClick={() => this.handleDeleteUser(user)}>
+                                    <i className="fas fa-trash-alt"></i> &nbsp;
+                                    Delete
+                                </button>
                             </td>
                         </tr>)
                     })}

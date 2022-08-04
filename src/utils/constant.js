@@ -2,18 +2,21 @@ export const path = {
     HOME: '/',
     LOGIN: '/login',
     LOG_OUT: '/logout',
-    SYSTEM: '/system'
+    SYSTEM: '/system',
+    HOMEPAGE: '/home',
+    DETAIL_DOCTOR: '/detail-doctor/:id',
 };
 
-export const languages = {
+export const LANGUAGES = {
     VI: 'vi',
     EN: 'en'
 };
  
-export const manageActions = {
-    ADD: "ADD",
+export const CRUD_ACTIONS = {
+    CREATE: "CREATE",
     EDIT: "EDIT",
-    DELETE: "DELETE"
+    DELETE: "DELETE",
+    READ: "READ",
 };
 
 export const dateFormat = {
