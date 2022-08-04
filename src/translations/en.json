@@ -12,6 +12,10 @@
         "language": "Language",
         "welcome":"Hello"
     },
+    "homepage": {
+        "doctor-outstanding": "Doctor Outstanding",
+        "show-more": "Show More"
+    },
     "banner": {
         "title1": "MEDICAL BACKGROUND",
         "title2": "COMPREHENSIVE HEALTH CARE",

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { LANGUAGES, CRUD_ACTIONS } from '../../../utils';
+import { LANGUAGES, CRUD_ACTIONS, CommonUtils } from '../../../utils';
 import * as actions from '../../../store/actions';
 import './UserRedux.scss';
 import Lightbox from 'react-image-lightbox';
@@ -77,7 +77,7 @@ class UserRedux extends Component {
         if (prevProps.listUsers !== this.props.listUsers) {
             let arrGenders = this.props.genderRedux;
             let arrRole = this.props.roleRedux;
-            let arrPosition = this.props.position;
+            let arrPosition = this.props.positionRedux;
 
             this.setState({
                 email: '',
@@ -86,23 +86,26 @@ class UserRedux extends Component {
                 lastName: '',
                 phonenumber: '',
                 address: '',
-                gender: arrGenders && arrGenders.length > 0 ? arrGenders[0].key : '',
-                position: arrPosition && arrPosition.length > 0 ? arrPosition[0].key : '',
-                roleId: arrRole && arrRole.length > 0 ? arrRole[0].key : '',
+                gender: arrGenders && arrGenders.length > 0 ? arrGenders[0].keyMap : '',
+                position: arrPosition && arrPosition.length > 0 ? arrPosition[0].keyMap : '',
+                roleId: arrRole && arrRole.length > 0 ? arrRole[0].keyMap : '',
                 avatar: '',
                 action: CRUD_ACTIONS.CREATE,
+                previewImgUrl: '',
             })
         }
     }
 
-    handleOnChangeImage = (event) => {
+    handleOnChangeImage = async (event) => {
+        //convert image to base64
         let data = event.target.files;
         let file = data[0];
         if (file) {
             const objectUrl = URL.createObjectURL(file);
+            let base64 = await CommonUtils.getBase64(file);
             this.setState({
                 previewImgUrl: objectUrl,
-                avatar: file
+                avatar: base64
             })
         }
     }
@@ -140,6 +143,7 @@ class UserRedux extends Component {
                     roleId: this.state.roleId,
                     phonenumber: this.state.phonenumber,
                     position: this.state.position,
+                    avatar: this.state.avatar,
                 });
             }
 
@@ -176,6 +180,11 @@ class UserRedux extends Component {
     }
 
     handleEditUserFromParent = (user) => {
+        let imageBase64 = '';
+        if (user.image) {
+            imageBase64 = new Buffer(user.image, 'base64').toString('binary');
+        }
+
         this.setState({
             id: user.id,
             email: user.email,
@@ -188,6 +197,7 @@ class UserRedux extends Component {
             position: user.positionId,
             roleId: user.roleId,
             avatar: '',
+            previewImgUrl: imageBase64,
             action: CRUD_ACTIONS.EDIT,
         })
     }
@@ -218,7 +228,7 @@ class UserRedux extends Component {
                                             <div className="preview-image"
                                                 style={{
                                                     backgroundImage: `url(${this.state.previewImgUrl})`,
-                                                    backgroundSize: "contain",
+                                                    backgroundSize: "cover",
                                                     backgroundRepeat: "no-repeat",
                                                     backgroundPosition: "center",
                                                     height: '210px',
@@ -314,7 +324,7 @@ class UserRedux extends Component {
                                                     {
                                                         genders && genders.length > 0 && genders.map((gender, index) => {
                                                             return (
-                                                                <option key={index} value={gender.key}>{
+                                                                <option key={index} value={gender.keyMap}>{
                                                                     language === LANGUAGES.VI ? gender.valueVi : gender.valueEn
                                                                 }</option>
                                                             );
@@ -330,7 +340,7 @@ class UserRedux extends Component {
                                                     {
                                                         roles && roles.length > 0 && roles.map((role, index) => {
                                                             return (
-                                                                <option key={index} value={role.key}>{
+                                                                <option key={index} value={role.keyMap}>{
                                                                     language === LANGUAGES.VI ? role.valueVi : role.valueEn
                                                                 }</option>
                                                             )
@@ -346,7 +356,7 @@ class UserRedux extends Component {
                                                     {
                                                         positions && positions.length > 0 && positions.map((position, index) => {
                                                             return (
-                                                                <option key={index} value={position.key}>{
+                                                                <option key={index} value={position.keyMap}>{
                                                                     language === LANGUAGES.VI ? position.valueVi : position.valueEn
                                                                 }</option>
                                                             )

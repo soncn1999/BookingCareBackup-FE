@@ -188,61 +188,57 @@ class HomeHeader extends Component {
                 <div className="sidebar__overlay"
                     onClick={() => this.toggleSidebar()}
                     style={this.state.isOpenSidebar ? { "display": "block" } : { "display": "none" }}></div>
-                <div className="banner">
-                    <div className="banner-title">
-                        <p>
-                            <FormattedMessage id="banner.title1" />
-                        </p>
-                        <b>
-                            <FormattedMessage id="banner.title2" />
-                        </b>
-                    </div>
-                    <div className="banner-search">
-                        <div className="banner-search__input">
-                            <div className="input-group mb-3">
-                                <div className="input-group-prepend">
-                                    <button className="btn btn-outline-secondary banner-search__input-btn" type="button">
-                                        <i className="fa-solid fa-magnifying-glass"></i>
-                                    </button>
-                                </div>
+                {this.props.isShowBanner &&
+                    <div className="banner">
+                        <div className="banner-title">
+                            <p>
+                                <FormattedMessage id="banner.title1" />
+                            </p>
+                            <b>
+                                <FormattedMessage id="banner.title2" />
+                            </b>
+                        </div>
+                        <div className="banner-search">
+                            <div className="banner-search__input">
+                                <div className="input-group mb-3">
+                                    <div className="input-group-prepend">
+                                        <button className="btn btn-outline-secondary banner-search__input-btn" type="button">
+                                            <i className="fa-solid fa-magnifying-glass"></i>
+                                        </button>
+                                    </div>
 
-                                <input type="text"
-                                    className="form-control banner-search__input-form"
-                                    placeholder= {this.state.isVi ? "Tìm bệnh viện" : "Search Hospitals"}
-                                    aria-label=""
-                                    aria-describedby="basic-addon1" />
+                                    <input type="text"
+                                        className="form-control banner-search__input-form"
+                                        placeholder={this.state.isVi ? "Tìm bệnh viện" : "Search Hospitals"}
+                                        aria-label=""
+                                        aria-describedby="basic-addon1" />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="banner-download">
-                        <div className="banner-download__icon banner-download__icon-chplay">
-                            <a href=""></a>
+                        <div className="banner-download">
+                            <div className="banner-download__icon banner-download__icon-chplay">
+                                <a href=""></a>
+                            </div>
+                            <div className="banner-download__icon banner-download__icon-appstore">
+                                <a href=""></a>
+                            </div>
                         </div>
-                        <div className="banner-download__icon banner-download__icon-appstore">
-                            <a href=""></a>
+                        <div className="banner-category">
+                            <ul className="banner-list">
+                                {arrMedicalExamine.map((item, index) => {
+                                    return (
+                                        <li className="banner-item" key={item.id}>
+                                            <div className={`banner-item__img banner-item__img-${item.id}`}></div>
+                                            <div className="banner-item__title">
+                                                <a href={item.url}>{item.title}</a>
+                                            </div>
+                                        </li>
+                                    );
+                                })}
+                            </ul>
                         </div>
                     </div>
-                    <div className="banner-category">
-                        <ul className="banner-list">
-                            {arrMedicalExamine.map((item, index) => {
-                                return (
-                                    <li className="banner-item" key={item.id}>
-                                        <div className={`banner-item__img banner-item__img-${item.id}`}></div>
-                                        <div className="banner-item__title">
-                                            <a href={item.url}>{item.title}</a>
-                                        </div>
-                                    </li>
-                                );
-                            })}
-                        </ul>
-                    </div>
-                </div>
-                <div className="content">
-
-                </div>
-                <div className="footer">
-
-                </div>
+                }
             </div>
         );
     }

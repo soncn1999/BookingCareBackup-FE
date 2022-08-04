@@ -12,10 +12,9 @@ import './Homepage.scss';
 class Homepage extends Component {
 
     render() {
-
         return (
             <div>
-                <HomeHeader />
+                <HomeHeader isShowBanner={true} />
                 <Specialty />
                 <MedicalFacility />
                 <DoctorOutstanding />

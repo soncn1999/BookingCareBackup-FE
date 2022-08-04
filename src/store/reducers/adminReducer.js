@@ -14,6 +14,8 @@ const initialState = {
     positions: [],
     isLoadingGender: false,
     users: [],
+    doctors: [],
+    doctorAll: [],
 }
 
 const adminReducer = (state = initialState, action) => {
@@ -25,7 +27,6 @@ const adminReducer = (state = initialState, action) => {
                 ...copyState,
             }
         case actionTypes.FETCH_GENDER_SUCCESS:
-            console.log('Gender data: ', action.data);
             state.genders = action.data;
             state.isLoadingGender = false;
             return {
@@ -38,7 +39,6 @@ const adminReducer = (state = initialState, action) => {
                 ...state,
             }
         case actionTypes.FETCH_POSITION_SUCCESS:
-            console.log('Position data: ', action.data);
             state.positions = action.data;
             return {
                 ...state,
@@ -49,7 +49,6 @@ const adminReducer = (state = initialState, action) => {
                 ...state,
             }
         case actionTypes.FETCH_ROLE_SUCCESS:
-            console.log('Role data: ', action.data);
             state.roles = action.data;
             return {
                 ...state,
@@ -60,7 +59,6 @@ const adminReducer = (state = initialState, action) => {
                 ...state,
             }
         case actionTypes.FETCH_ALL_USER_SUCCESS: {
-            console.log(action);
             state.users = action.data;
             return {
                 ...state,
@@ -68,6 +66,30 @@ const adminReducer = (state = initialState, action) => {
         }
         case actionTypes.FETCH_ALL_USER_FAILED: {
             state.users = [];
+            return {
+                ...state,
+            }
+        }
+        case actionTypes.FETCH_TOP_DOCTOR_SUCCESS: {
+            state.doctors = action.data;
+            return {
+                ...state,
+            }
+        }
+        case actionTypes.FETCH_TOP_DOCTOR_SUCCESS: {
+            state.doctors = [];
+            return {
+                ...state,
+            }
+        }
+        case actionTypes.FETCH_ALL_DOCTOR_SUCCESS: {
+            state.doctorAll = action.data;
+            return {
+                ...state,
+            }
+        }
+        case actionTypes.FETCH_ALL_DOCTOR_SUCCESS: {
+            state.doctorAll = [];
             return {
                 ...state,
             }

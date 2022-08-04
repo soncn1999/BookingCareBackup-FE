@@ -36,4 +36,24 @@ const getAllCode = (dataType) => {
     return axios.get(`/api/allcode?type=${dataType}`);
 }
 
-export { handleLoginApi, getAllUsers, createNewUser, deleteUser, updateUser, getAllCode };
+const getTopDoctorHomeService = (limit) => {
+    return axios.get(`/api/top-doctor-home?limit=${limit}`);
+}
+
+const getAllDoctor = () => {
+    return axios.get(`/api/get-all-doctors`);
+}
+
+const saveDetailDoctor = (data) => {
+    return axios.post('/api/save-info-doctor', data);
+}
+
+const getDetailInfoDoctor = (id) => {
+    return axios.get(`/api/get-detail-doctor-by-id?id=${id}`);
+}
+
+export {
+    handleLoginApi, getAllUsers, createNewUser, deleteUser, updateUser,
+    getAllCode, getTopDoctorHomeService, getAllDoctor, saveDetailDoctor, 
+    getDetailInfoDoctor
+};
