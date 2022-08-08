@@ -31,12 +31,12 @@ class Login extends Component {
 
         try {
             let data = await handleLoginApi(this.state.email, this.state.password);
-            if(data && data.errCode !==0 ){
+            if (data && data.errCode !== 0) {
                 this.setState({
                     errMessage: data.message,
                 });
             }
-            if(data && data.errCode ==0 ){
+            if (data && data.errCode == 0) {
                 this.props.userLoginSuccess(data.user);
             }
         } catch (error) {
@@ -56,6 +56,12 @@ class Login extends Component {
         this.setState({
             isShowPassword: !this.state.isShowPassword,
         })
+    }
+
+    handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            this.handleLogin();
+        }
     }
 
     render() {
@@ -86,13 +92,14 @@ class Login extends Component {
                                     name="password"
                                     value={this.state.password}
                                     onChange={(event) => this.handleOnChangeInput(event)}
+                                    onKeyDown={(event) => this.handleKeyDown(event)}
                                 />
                                 <div className="login-input__password-showhide" onClick={() => this.handleShowPassword()}>
                                     <i className={this.state.isShowPassword ? 'fas fa-eye' : 'fas fa-eye-slash'}></i>
                                 </div>
                             </div>
                         </div>
-                        <div className="col-12" style={{color: 'red'}}>
+                        <div className="col-12" style={{ color: 'red' }}>
                             {this.state.errMessage}
                         </div>
                         <div className="col-12 login-input">

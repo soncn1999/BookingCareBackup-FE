@@ -1,5 +1,4 @@
 import actionTypes from '../actions/actionTypes';
-import { getAllCode } from '../../services/userService';
 
 // const initContentOfConfirmModal = {
 //     isOpen: false,
@@ -16,6 +15,7 @@ const initialState = {
     users: [],
     doctors: [],
     doctorAll: [],
+    allScheduleTime: []
 }
 
 const adminReducer = (state = initialState, action) => {
@@ -76,7 +76,7 @@ const adminReducer = (state = initialState, action) => {
                 ...state,
             }
         }
-        case actionTypes.FETCH_TOP_DOCTOR_SUCCESS: {
+        case actionTypes.FETCH_TOP_DOCTOR_FAILED: {
             state.doctors = [];
             return {
                 ...state,
@@ -88,8 +88,20 @@ const adminReducer = (state = initialState, action) => {
                 ...state,
             }
         }
-        case actionTypes.FETCH_ALL_DOCTOR_SUCCESS: {
+        case actionTypes.FETCH_ALL_DOCTOR_FAILED: {
             state.doctorAll = [];
+            return {
+                ...state,
+            }
+        }
+        case actionTypes.FETCH_ALLCODE_SCHEDULE_TIME_SUCCESS: {
+            state.allScheduleTime = action.data;
+            return {
+                ...state,
+            }
+        }
+        case actionTypes.FETCH_ALLCODE_SCHEDULE_TIME_FAILED: {
+            state.allScheduleTime = [];
             return {
                 ...state,
             }

@@ -54,6 +54,9 @@
             "manage-specialty": "QL chuyên khoa",
             "handbook": "Cẩm nang",
             "manage-handbook": "QL cẩm nang"
+        },
+        "doctor": {
+            "manage-schedule": "QL kế hoạch khám bệnh"
         }
     },
     "manage-user": {
@@ -71,5 +74,11 @@
         "submit": "Đăng ký",
         "edit": "Lưu chỉnh sửa",
         "upload-avatar": "Tải lên ảnh đại diện"
+    },
+    "manage-schedule": {
+        "title": "QL Kế hoạch khám bệnh của bác sỹ",
+        "choose-doctor": "Chọn bác sỹ",
+        "choose-date": "Chọn ngày khám",
+        "choose-time": "Chọn giờ khám"
     }
 }

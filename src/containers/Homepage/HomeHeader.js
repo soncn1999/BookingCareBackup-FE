@@ -6,6 +6,7 @@ import { initMessageListener } from 'redux-state-sync';
 import { FormattedMessage } from 'react-intl';
 import { LANGUAGES } from '../../utils';
 import { changeLanguageApp } from '../../store/actions';
+import { withRouter } from 'react-router';
 
 class HomeHeader extends Component {
     constructor(props) {
@@ -36,6 +37,10 @@ class HomeHeader extends Component {
                 isVi: false,
             })
         }
+    }
+
+    returnToHome = () => {
+        this.props.history.push('/home');
     }
 
     render() {
@@ -112,7 +117,7 @@ class HomeHeader extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div className="logo"></div>
+                        <div className="logo" onClick={() => this.returnToHome()}></div>
                     </div>
                     <div className="navbar">
                         <div className="navbar-item">
@@ -258,4 +263,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeHeader);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HomeHeader));
