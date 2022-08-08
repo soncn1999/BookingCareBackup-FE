@@ -99,10 +99,6 @@ class ManageDoctor extends Component {
         return selectArr;
     }
 
-    handleChangeInput = (event) => {
-        console.log(event.target.value);
-    }
-
     render() {
         return (
             <div className="manage-doctor-container">

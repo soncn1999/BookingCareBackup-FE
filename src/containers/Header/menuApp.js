@@ -1,6 +1,6 @@
 export const adminMenu = [
     { //Qly ng dung
-        name: 'menu.admin.manage-user', 
+        name: 'menu.admin.manage-user',
         menus: [
             {
                 name: 'menu.admin.crud',
@@ -18,15 +18,19 @@ export const adminMenu = [
                 //     { name: 'menu.system.system-administrator.user-redux', link: '/system/user-redux' },
                 // ]
             },
-            {
-                name: 'menu.admin.manage-admin',
-                link: '/system/user-admin',
+            // {
+            //     name: 'menu.admin.manage-admin',
+            //     link: '/system/user-admin',
+            // },
+            { //Qly ke hoach kham benh
+                name: 'menu.doctor.manage-schedule',
+                link: '/doctor/manage-schedule',
             },
         ]
     },
 
     { //Qly phong kham
-        name: 'menu.admin.clinic', 
+        name: 'menu.admin.clinic',
         menus: [
             {
                 name: 'menu.admin.manage-clinic',
@@ -36,7 +40,7 @@ export const adminMenu = [
     },
 
     { //Qly chuyen khoa
-        name: 'menu.admin.specialty', 
+        name: 'menu.admin.specialty',
         menus: [
             {
                 name: 'menu.admin.manage-specialty',
@@ -46,7 +50,7 @@ export const adminMenu = [
     },
 
     { //Qly cam nang
-        name: 'menu.admin.handbook', 
+        name: 'menu.admin.handbook',
         menus: [
             {
                 name: 'menu.admin.manage-handbook',
@@ -54,4 +58,15 @@ export const adminMenu = [
             },
         ]
     },
+];
+
+export const doctorMenu = [
+    {
+        name: 'menu.admin.manage-user',
+        menus: [
+            {
+                name: 'menu.doctor.manage-schedule', link: '/doctor/manage-schedule',
+            },
+        ]
+    }
 ];
