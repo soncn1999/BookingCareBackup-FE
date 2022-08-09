@@ -3,11 +3,14 @@ import { connect } from "react-redux";
 import { Redirect, Route, Switch } from 'react-router-dom';
 import './ManageSchedule.scss';
 import { FormattedMessage } from 'react-intl';
-import { LANGUAGES } from '../../../utils/constant';
+import { LANGUAGES, dateFormat } from '../../../utils/constant';
 import Select from 'react-select';
+import { saveBulkScheduleDoctor } from '../../../services/userService';
 import * as actions from '../../../store/actions';
 import DatePicker from '../../../components/Input/DatePicker';
 import moment from 'moment';
+import { toast } from 'react-toastify';
+import _ from 'lodash';
 
 class ManageSchedule extends Component {
     constructor(props) {
@@ -29,14 +32,21 @@ class ManageSchedule extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
+
         if (prevProps.doctorAllRedux !== this.props.doctorAllRedux) {
             this.setState({
                 listDoctor: this.buildDataInputSelect(this.props.doctorAllRedux),
             })
         }
+
+        let dataTime = this.props.getScheduleTimeRedux;
+        if (dataTime && dataTime.length > 0) {
+            dataTime = dataTime.map((item) => ({ ...item, isActive: false }));
+        }
+
         if (prevProps.getScheduleTimeRedux !== this.props.getScheduleTimeRedux) {
             this.setState({
-                rangeTime: this.props.getScheduleTimeRedux
+                rangeTime: dataTime
             })
         }
     }
@@ -66,9 +76,111 @@ class ManageSchedule extends Component {
         });
     }
 
+    handleClickBtnTime = (time) => {
+        let rangeTimeCopy = this.state.rangeTime;
+        if (rangeTimeCopy && rangeTimeCopy.length > 0) {
+            rangeTimeCopy.map((item) => {
+                if (item.id === time.id) {
+                    item.isActive = !item.isActive;
+                }
+                return item;
+            });
+
+            this.setState({
+                rangeTime: rangeTimeCopy
+            });
+        }
+    }
+
+    handleSaveSchedule = async () => {
+        let { rangeTime, selectedDoctor, currentDate } = this.state;
+        let result = [];
+        if (!currentDate) {
+            toast.error('🐦 You have to choose Examination Date!', {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+            return;
+        }
+
+        if (selectedDoctor && _.isEmpty(selectedDoctor)) {
+            toast.error('🐦 You have to choose Examination Doctor!', {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+            return;
+        }
+
+        // let formatedDate = moment(currentDate).format(dateFormat.SEND_TO_SERVER);
+        console.log('current date: ' + currentDate);
+        let formatedDate = new Date(currentDate).getTime();
+
+        if (rangeTime && rangeTime.length > 0) {
+            let selectedTime = rangeTime.filter((item) => item.isActive === true);
+            if (selectedTime && selectedTime.length > 0) {
+                selectedTime.map((time) => {
+                    let object = {};
+                    object.doctorId = selectedDoctor.value;
+                    object.date = formatedDate;
+                    object.timeType = time.keyMap;
+                    result.push(object);
+                    return result;
+                })
+            } else {
+                toast.error('🐦 You have to choose Examination Time!', {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+                return;
+            }
+        }
+        let response = await saveBulkScheduleDoctor({
+            arrSchedule: result,
+            doctorId: selectedDoctor.value,
+            formatedDate: formatedDate
+        });
+        if (response && response.errCode === 0) {
+            toast.success('🐶 Create new Schedule Successful!', {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        } else {
+            toast.error(`🐦 Ops, ${response.message}`, {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        }
+    }
+
     render() {
-        let rangeTime = this.props.getScheduleTimeRedux;
+        let { rangeTime } = this.state;
         let language = this.props.language;
+
         return (
             <div className="manage-schedule-container">
                 <div className="m-s-title">
@@ -99,7 +211,7 @@ class ManageSchedule extends Component {
                             <div className="pick-hour-container">
                                 {
                                     rangeTime && rangeTime.length > 0 && rangeTime.map((item, index) => {
-                                        return (<button className="btn btn-outline-primary" key={index}>
+                                        return (<button className={item.isActive ? 'btn btn-warning' : "btn btn-outline-primary"} key={index} onClick={() => this.handleClickBtnTime(item)}>
                                             {LANGUAGES.VI == language ? item.valueVi : item.valueEn}
                                         </button>)
                                     })
@@ -107,7 +219,7 @@ class ManageSchedule extends Component {
                             </div>
                         </div>
                         <div className="col-md-12">
-                            <button className="btn btn-primary mt-4">Save Info</button>
+                            <button className="btn btn-primary mt-4" onClick={() => this.handleSaveSchedule()}>Save Info</button>
                         </div>
                     </div>
                 </div>
