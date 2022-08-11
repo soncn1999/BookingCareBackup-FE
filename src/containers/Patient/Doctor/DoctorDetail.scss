@@ -43,3 +43,15 @@
 .detail-info-doctor li {
     list-style-type: none;
 }
+
+.schedule-doctor {
+    display: flex;
+    height: 200px;
+    .content-left {
+        width: 50%;
+        border-right: 2px solid #45c3d2;
+    }
+    .content-right {
+        width: 50%;
+    }
+}

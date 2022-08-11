@@ -3,9 +3,9 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { getDetailInfoDoctor } from '../../../services/userService';
 import { LANGUAGES } from '../../../utils/constant';
-import Home from '../../../routes/Home';
 import * as actions from '../../../store/actions';
 import HomeHeader from '../../Homepage/HomeHeader';
+import DoctorSchedule from './DoctorSchedule';
 import './DoctorDetail.scss';
 
 class DetailDoctor extends Component {
@@ -83,7 +83,12 @@ class DetailDoctor extends Component {
                         </div>
                     </div>
 
-                    <div className="schedule-doctor"></div>
+                    <div className="schedule-doctor">
+                        <div className="content-left">
+                            <DoctorSchedule />
+                        </div>
+                        <div className="content-right"></div>
+                    </div>
                     <div className="detail-info-doctor">
                         {detailDoctor.Markdown && detailDoctor.Markdown.contentHTML
                             && <div dangerouslySetInnerHTML={{ __html: detailDoctor.Markdown.contentHTML }}></div>
