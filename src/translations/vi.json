@@ -80,5 +80,13 @@
         "choose-doctor": "Chọn bác sỹ",
         "choose-date": "Chọn ngày khám",
         "choose-time": "Chọn giờ khám"
+    },
+    "patient": {
+        "detail-doctor": {
+            "schedule": "Lịch khám",
+            "no-schedule": "Hiện tại không có lịch khám bệnh",
+            "select": "Chọn",
+            "book": "và đặt (Phí đặt lịch 0đ)"
+        }
     }
 }

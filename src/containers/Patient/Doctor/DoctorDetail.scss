@@ -40,8 +40,11 @@
     }
 }
 
-.detail-info-doctor li {
-    list-style-type: none;
+.detail-info-doctor {
+    margin-top: 30px;
+    & li {
+        list-style-type: none;
+    }
 }
 
 .schedule-doctor {

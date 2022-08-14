@@ -23,7 +23,6 @@ class Header extends Component {
         let { userInfo } = this.props;
         let menu = [];
         if (userInfo && !_.isEmpty(userInfo)) {
-            console.log('Check Role!');
             let role = userInfo.roleId;
             if (role === USER_ROLE.ADMIN) {
                 menu = adminMenu
