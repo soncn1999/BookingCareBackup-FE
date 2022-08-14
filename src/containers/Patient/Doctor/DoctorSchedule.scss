@@ -25,6 +25,8 @@
     .time-content {
         display: flex;
         flex-wrap: wrap;
+        min-height: 110px;
+        margin-bottom: 10px;
         &__icon {
             background-color: #fff04b;
             border: none;
@@ -34,6 +36,7 @@
             font-weight: 500;
             min-width: 24%;
             border-radius: 3px;
+            height: 45px;
             &:hover {
                 color: #45c3d2;
             }

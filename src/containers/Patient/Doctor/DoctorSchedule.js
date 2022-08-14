@@ -19,23 +19,31 @@ class DoctorSchedule extends Component {
         }
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         //get the current date
         console.log('moment vie: ', moment(new Date()).format('dddd - DD/MM'));
         console.log('moment en: ', moment(new Date()).locale('en').format('ddd - DD/MM'));
-        //get 7 date 
-        console.log('language: ', this.props.languageReduxge);
-        let arrDays = this.setArrDays();
+        //get 7 date
+        let arrDays = this.getArrDays();
 
         this.setState({
             allDays: arrDays,
-        })
+        });
 
+        if (this.props.match && this.props.match.params && this.props.match.params.id && arrDays && arrDays.length > 0) {
+            let response = await getScheduleDoctorByDate(this.props.match.params.id, arrDays[0].value);
+            console.log(response);
+            if (response && response.errCode === 0) {
+                this.setState({
+                    availableTimes: response.data
+                })
+            }
+        }
     }
 
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.languageRedux !== this.props.languageRedux) {
-            let arrDays = this.setArrDays();
+            let arrDays = this.getArrDays();
 
             this.setState({
                 allDays: arrDays,
@@ -47,15 +55,27 @@ class DoctorSchedule extends Component {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
-    setArrDays = () => {
+    getArrDays = () => {
         let arrDays = [];
         for (let i = 0; i < 7; i++) {
             let object = {};
             if (this.props.languageRedux === LANGUAGES.VI) {
-                let labelVi = moment(new Date()).add(i, 'days').format('dddd - DD/MM');
-                object.label = this.capitalizeFirstLetter(labelVi);
+                if (i === 0) {
+                    let ddMM = moment(new Date()).add(i, 'days').format('DD/MM');
+                    let today = `Hôm nay - ${ddMM}`;
+                    object.label = today;
+                } else {
+                    let labelVi = moment(new Date()).add(i, 'days').format('dddd - DD/MM');
+                    object.label = this.capitalizeFirstLetter(labelVi);
+                }
             } else {
-                object.label = moment(new Date()).add(i, 'days').locale('en').format('ddd-DD/MM');
+                if (i === 0) {
+                    let ddMM = moment(new Date()).format('DD/MM');
+                    let today = `Today - ${ddMM}`;
+                    object.label = today;
+                } else {
+                    object.label = moment(new Date()).add(i, 'days').locale('en').format('ddd-DD/MM');
+                }
             }
             object.value = moment(new Date()).add(i, 'days').startOf('days').valueOf();
             // startOf('days): Lay theo ngay, gio mac dinh la 0:00:00, mac dinh new Date tinh ca gio phut giay
@@ -68,7 +88,6 @@ class DoctorSchedule extends Component {
         if (this.props.match && this.props.match.params && this.props.match.params.id) {
             let id = this.props.match.params.id;
             let response = await getScheduleDoctorByDate(id, event.target.value);
-            console.log(response);
             if (response && response.errCode === 0) {
                 this.setState({
                     availableTimes: response.data,
@@ -99,7 +118,7 @@ class DoctorSchedule extends Component {
                     <div className="text-calendar">
                         <span className="text-calendar__title">
                             <i className="fa-solid fa-calendar-days"></i>
-                            &nbsp;Lịch khám
+                            &nbsp; <FormattedMessage id="patient.detail-doctor.schedule" />
                         </span>
                     </div>
                     <div className="time-content">
@@ -108,10 +127,16 @@ class DoctorSchedule extends Component {
                                 {language === LANGUAGES.VI ? item.timeTypeData.valueVi : item.timeTypeData.valueEn}
                             </button>);
                         })}
+
                         {
-                            availableTimes && availableTimes.length == 0 && <span>Không có lịch hẹn</span>
+                            availableTimes && availableTimes.length == 0 && <span>
+                                <FormattedMessage id="patient.detail-doctor.no-schedule" />
+                            </span>
                         }
                     </div>
+                    {
+                        availableTimes && availableTimes.length > 0 && <span><FormattedMessage id="patient.detail-doctor.select" /> <i className="fa-solid fa-hand-pointer"></i> <FormattedMessage id="patient.detail-doctor.book" /></span>
+                    }
                 </div>
             </div>
         )

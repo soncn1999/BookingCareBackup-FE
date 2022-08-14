@@ -80,5 +80,13 @@
         "choose-doctor": "Choose Doctor",
         "choose-date": "Choose Examination Date",
         "choose-time": "Choose Examination Time"
+    },
+    "patient": {
+        "detail-doctor": {
+            "schedule": "Examination Schedule",
+            "no-schedule": "No Schedule Available",
+            "select": "Select",
+            "book": "and booking (fee is 0đ)"
+        }
     }
 }
