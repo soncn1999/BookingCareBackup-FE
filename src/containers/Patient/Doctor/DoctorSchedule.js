@@ -23,6 +23,7 @@ class DoctorSchedule extends Component {
         //get the current date
         console.log('moment vie: ', moment(new Date()).format('dddd - DD/MM'));
         console.log('moment en: ', moment(new Date()).locale('en').format('ddd - DD/MM'));
+
         //get 7 date
         let arrDays = this.getArrDays();
 
@@ -32,7 +33,6 @@ class DoctorSchedule extends Component {
 
         if (this.props.match && this.props.match.params && this.props.match.params.id && arrDays && arrDays.length > 0) {
             let response = await getScheduleDoctorByDate(this.props.match.params.id, arrDays[0].value);
-            console.log(response);
             if (response && response.errCode === 0) {
                 this.setState({
                     availableTimes: response.data
@@ -61,7 +61,7 @@ class DoctorSchedule extends Component {
             let object = {};
             if (this.props.languageRedux === LANGUAGES.VI) {
                 if (i === 0) {
-                    let ddMM = moment(new Date()).add(i, 'days').format('DD/MM');
+                    let ddMM = moment(new Date()).add(i, 'days').format('DD/MM'); //
                     let today = `Hôm nay - ${ddMM}`;
                     object.label = today;
                 } else {

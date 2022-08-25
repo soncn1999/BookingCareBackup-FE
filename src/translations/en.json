@@ -88,5 +88,14 @@
             "select": "Select",
             "book": "and booking (fee is 0đ)"
         }
+    },
+    "admin": {
+        "manage-doctor": {
+            "title": "Create Doctor's Information",
+            "select-doctor": "Choose a doctor",
+            "intro": "Introduction",
+            "add": "Create Information",
+            "save": "Save Information"
+        }
     }
 }

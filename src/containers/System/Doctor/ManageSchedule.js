@@ -32,7 +32,6 @@ class ManageSchedule extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-
         if (prevProps.doctorAllRedux !== this.props.doctorAllRedux) {
             this.setState({
                 listDoctor: this.buildDataInputSelect(this.props.doctorAllRedux),
@@ -40,6 +39,7 @@ class ManageSchedule extends Component {
         }
 
         let dataTime = this.props.getScheduleTimeRedux;
+
         if (dataTime && dataTime.length > 0) {
             dataTime = dataTime.map((item) => ({ ...item, isActive: false }));
         }
@@ -64,7 +64,7 @@ class ManageSchedule extends Component {
         return selectArr;
     }
 
-    handleChangeSelect = async (selectedDoctor) => {
+    handleChangeSelect = (selectedDoctor) => {
         this.setState({
             selectedDoctor
         });
@@ -122,7 +122,6 @@ class ManageSchedule extends Component {
         }
 
         // let formatedDate = moment(currentDate).format(dateFormat.SEND_TO_SERVER);
-        console.log('current date: ' + currentDate);
         let formatedDate = new Date(currentDate).getTime();
 
         if (rangeTime && rangeTime.length > 0) {
@@ -149,11 +148,13 @@ class ManageSchedule extends Component {
                 return;
             }
         }
+
         let response = await saveBulkScheduleDoctor({
             arrSchedule: result,
             doctorId: selectedDoctor.value,
             formatedDate: formatedDate
         });
+
         if (response && response.errCode === 0) {
             toast.success('🐶 Create new Schedule Successful!', {
                 position: "bottom-right",
@@ -180,7 +181,7 @@ class ManageSchedule extends Component {
     render() {
         let { rangeTime } = this.state;
         let language = this.props.language;
-        let yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
+        let yesterday = new Date(new Date().setDate(new Date().getDate() - 1)); // get yesterday dete by using JS
 
         return (
             <div className="manage-schedule-container">
@@ -214,7 +215,7 @@ class ManageSchedule extends Component {
                                     rangeTime && rangeTime.length > 0 && rangeTime.map((item, index) => {
                                         return (<button className={item.isActive ? 'btn btn-warning' : "btn btn-outline-primary"} key={index} onClick={() => this.handleClickBtnTime(item)}>
                                             {LANGUAGES.VI == language ? item.valueVi : item.valueEn}
-                                        </button>)
+                                        </button>);
                                     })
                                 }
                             </div>

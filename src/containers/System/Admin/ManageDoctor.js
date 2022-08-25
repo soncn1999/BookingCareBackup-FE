@@ -102,22 +102,52 @@ class ManageDoctor extends Component {
     render() {
         return (
             <div className="manage-doctor-container">
-                <div className="manage-doctor-title">Manage Doctor</div>
+                <div className="manage-doctor-title"><FormattedMessage id="admin.manage-doctor.select-doctor" /></div>
                 <div className="more-info">
                     <div className="content-left form-group">
-                        <label>Choose doctor: </label>
+                        <label><FormattedMessage id="admin.manage-doctor.select-doctor" />: </label>
                         <Select
                             value={this.state.selectedValue}
                             onChange={this.handleChangeSelect}
                             options={this.state.listDoctor}
+                            placeholder={'Choose a doctor'}
                         />
                     </div>
                     <div className="content-right">
-                        <label>Doctor Info: </label>
+                        <label><FormattedMessage id="admin.manage-doctor.intro" />: </label>
                         <textarea className="form-control"
                             rows="4" onChange={(event) => this.handleOnChangeDesc(event)}
                             value={this.state.description}
                         ></textarea>
+                    </div>
+                </div>
+                <div className="more-info-extra">
+                    <div className="row">
+                        <div className="col-4 form-group">
+                            <label>Choose Price</label>
+                            <input className="form-control" />
+                        </div>
+                        <div className="col-4 form-group">
+                            <label>Choose payment method</label>
+                            <input className="form-control" />
+                        </div>
+                        <div className="col-4 form-group">
+                            <label>Choose Province</label>
+                            <input className="form-control" />
+                        </div>
+
+                        <div className="col-4 form-group">
+                            <label>Name's Clinic</label>
+                            <input className="form-control" />
+                        </div>
+                        <div className="col-4 form-group">
+                            <label>Address Clinic</label>
+                            <input className="form-control" />
+                        </div>
+                        <div className="col-4 form-group">
+                            <label>Note</label>
+                            <input className="form-control" />
+                        </div>
                     </div>
                 </div>
                 <div className="manage-doctor-editor">
@@ -126,7 +156,7 @@ class ManageDoctor extends Component {
                         onChange={this.handleEditorChange} value={this.state.contentMarkdown} />
                 </div>
                 <button className="btn btn-danger save-content-doctor" onClick={() => this.handleSaveContentMarkdown()}>
-                    {this.state.hasOldData ? "Update" : "Save"}
+                    {this.state.hasOldData ? <FormattedMessage id="admin.manage-doctor.save" /> : <FormattedMessage id="admin.manage-doctor.add" />}
                 </button>
             </div>
         )

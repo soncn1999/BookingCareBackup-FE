@@ -103,6 +103,7 @@ class UserRedux extends Component {
         if (file) {
             const objectUrl = URL.createObjectURL(file);
             let base64 = await CommonUtils.getBase64(file);
+            console.log('base64 type: ', base64);
             this.setState({
                 previewImgUrl: objectUrl,
                 avatar: base64
@@ -180,10 +181,13 @@ class UserRedux extends Component {
     }
 
     handleEditUserFromParent = (user) => {
+        console.log('user image from API: ', user.image);
         let imageBase64 = '';
         if (user.image) {
             imageBase64 = new Buffer(user.image, 'base64').toString('binary');
         }
+
+        console.log('user image binary: ', imageBase64);
 
         this.setState({
             id: user.id,
