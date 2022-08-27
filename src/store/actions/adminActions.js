@@ -230,7 +230,6 @@ export const fetchAllDoctor = () => {
     return async (dispatch, getState) => {
         try {
             let res = await getAllDoctor();
-            console.log(res);
             if (res && res.errCode === 0) {
                 dispatch(fetchAllDoctorSuccess(res.data));
             } else {
@@ -302,8 +301,43 @@ export const fetchAllScheduleTime = () => {
 export const fetchAllCodeScheduleTimeSuccess = (data) => ({
     type: actionTypes.FETCH_ALLCODE_SCHEDULE_TIME_SUCCESS,
     data: data
-})
+});
 
 export const fetchAllCodeScheduleTimeFailed = () => ({
     type: actionTypes.FETCH_ALLCODE_SCHEDULE_TIME_FAILED,
-})
+});
+
+export const getRequiredDoctorInfo = () => {
+    return async (dispatch, getState) => {
+        try {
+            let resPrice = await getAllCode('PRICE');
+            let resPayment = await getAllCode('PAYMENT');
+            let resProvince = await getAllCode('PROVINCE');
+
+            if (resPrice && resPrice.errCode === 0 && resPayment && resPayment.errCode === 0 && resProvince && resProvince.errCode === 0) {
+                toast.success("🐹 Loading required doctor info succeeded!");
+                let data = {
+                    resPrice: resPrice.data,
+                    resPayment: resPayment.data,
+                    resProvince: resProvince.data,
+                }
+                dispatch(fetchRequiredDoctorInfoSuccess(data));
+            } else {
+                toast.warn("😒 Loading required doctor info failed!");
+                dispatch(fetchRequiredDoctorInfoFailed());
+            }
+        } catch (error) {
+            toast.error("😢 Loading required doctor info failed!");
+            dispatch(fetchRequiredDoctorInfoFailed());
+        }
+    }
+}
+
+export const fetchRequiredDoctorInfoSuccess = (data) => ({
+    type: actionTypes.FETCH_REQUIRED_DOCTOR_INFO_SUCCESS,
+    data: data
+});
+
+export const fetchRequiredDoctorInfoFailed = () => ({
+    type: actionTypes.FETCH_REQUIRED_DOCTOR_INFO_FAILED,
+});

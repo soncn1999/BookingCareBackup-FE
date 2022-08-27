@@ -7,6 +7,7 @@ import * as actions from '../../../store/actions';
 import HomeHeader from '../../Homepage/HomeHeader';
 import DoctorSchedule from './DoctorSchedule';
 import './DoctorDetail.scss';
+import DoctorExtraInfo from './DoctorExtraInfo';
 
 class DetailDoctor extends Component {
     constructor(props) {
@@ -87,7 +88,9 @@ class DetailDoctor extends Component {
                         <div className="content-left">
                             <DoctorSchedule />
                         </div>
-                        <div className="content-right"></div>
+                        <div className="content-right">
+                            <DoctorExtraInfo />
+                        </div>
                     </div>
                     <div className="detail-info-doctor">
                         {detailDoctor.Markdown && detailDoctor.Markdown.contentHTML
