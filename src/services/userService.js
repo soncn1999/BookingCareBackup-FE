@@ -64,9 +64,14 @@ const getExtraInfoDoctorById = (id) => {
     return axios.get(`/api/get-extra-info-doctor-by-id?id=${id}`);
 }
 
+const getProfileDoctorById = (id) => {
+    return axios.get(`/api/get-profile-doctor-by-id?id=${id}`);
+
+}
+
 export {
     handleLoginApi, getAllUsers, createNewUser, deleteUser, updateUser,
     getAllCode, getTopDoctorHomeService, getAllDoctor, saveDetailDoctor,
     getDetailInfoDoctor, saveBulkScheduleDoctor, getScheduleDoctorByDate,
-    getExtraInfoDoctorById,
+    getExtraInfoDoctorById, getProfileDoctorById,
 };
