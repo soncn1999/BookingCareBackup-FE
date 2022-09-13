@@ -1,0 +1,94 @@
+.booking-modal {
+    &-container {
+    }
+    &-content {
+        height: 600px;
+        display: flex;
+        flex-direction: column;
+    }
+    &-header {
+        display: flex;
+        padding: 10px;
+        background-color: #eee;
+        &__left {
+            flex: 3;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        &__right {
+            flex: 1 1;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            &--icon {
+                cursor: pointer;
+                &:hover {
+                    color: #45c3d2;
+                }
+            }
+        }
+    }
+    &-body {
+        height: 100%;
+    }
+    &-footer {
+        background-color: #eee;
+        display: flex;
+        justify-content: flex-end;
+        border-top: 1px solid #ccc;
+        padding: 10px;
+        &__btn {
+            font-size: 1.4rem;
+            color: #000;
+            &:hover {
+                color: #fff;
+            }
+            &--color-custom {
+                background-color: #45c3d2;
+                margin-right: 10px;
+            }
+        }
+    }
+}
+
+.doctor-info {
+    display: flex;
+    padding: 10px;
+    &__left {
+    }
+    &__right {
+        padding-left: 10px;
+    }
+    &__title {
+        text-transform: uppercase;
+        font-weight: 550;
+        padding: 10px 0 5px 0;
+    }
+    &__specialty {
+        font-weight: 550;
+        padding: 5px 0;
+    }
+    &__examination-schedule {
+        padding: 5px 0;
+    }
+    &__desc {
+        color: #45c3d2;
+    }
+}
+
+.doctor-price {
+    padding: 10px;
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    &__left {
+        color: #45c3d2;
+    }
+    &__right {
+        margin-left: 5px;
+        font-weight: 550;
+    }
+}
+
+.patient-form {
+    padding: 10px;
+}

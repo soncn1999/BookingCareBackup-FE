@@ -87,6 +87,29 @@
             "no-schedule": "No Schedule Available",
             "select": "Select",
             "book": "and booking (fee is 0đ)"
+        },
+        "extra-info-doctor": {
+            "show-detail": "Show more detail",
+            "hide-detail": "Hide detail",
+            "address-clinic": "Clinic Address",
+            "name-clinic": "Clinic Name",
+            "price": "Examination Price",
+            "price-desc": "Get priority treatment before booking through BookingCare. The cost of medical examination for foreigners is 30USD",
+            "payment-desc": "The patient can pay the cost in the form of"
+        },
+        "booking-modal": {
+            "booking-modal-title": "Examination Booking Infomation",
+            "booking-modal-form-fullname": "Fullname",
+            "booking-modal-form-email": "Email",
+            "booking-modal-form-phonenumber": "Phonenumber",
+            "booking-modal-form-address": "Address",
+            "booking-modal-form-gender": "Gender",
+            "booking-modal-form-dob": "Date of Birth",
+            "booking-modal-form-reason": "Reason",
+            "booking-modal-form-desc": "Description",
+            "booking-modal-form-booking": "Examination Booking",
+            "booking-modal-form-free-booking": "Free Booking",
+            "booking-modal-form-free-price": "Price"
         }
     },
     "admin": {
@@ -95,7 +118,13 @@
             "select-doctor": "Choose a doctor",
             "intro": "Introduction",
             "add": "Create Information",
-            "save": "Save Information"
+            "save": "Save Information",
+            "price": "Choose a price",
+            "payment": "Choose a payment",
+            "province": "Choose a province",
+            "name-clinic": "Name-Clinic",
+            "address-clinic": "Address Clinic",
+            "note": "Note"
         }
     }
 }

@@ -1,0 +1,40 @@
+.doctor-info {
+    display: flex;
+    padding: 10px;
+    &__left {
+    }
+    &__right {
+        padding-left: 10px;
+    }
+    &__title {
+        text-transform: uppercase;
+        font-weight: 550;
+        padding: 10px 0 5px 0;
+    }
+    &__specialty {
+        font-weight: 550;
+        padding: 5px 0;
+    }
+    &__examination-schedule {
+        padding: 5px 0;
+    }
+    &__desc {
+        color: #45c3d2;
+    }
+    &__short-desc {
+        text-align: justify;
+    }
+}
+
+.doctor-price {
+    padding: 10px;
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    &__left {
+        color: #45c3d2;
+    }
+    &__right {
+        margin-left: 5px;
+        font-weight: 550;
+    }
+}
