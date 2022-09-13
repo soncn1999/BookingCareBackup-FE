@@ -56,6 +56,7 @@ class ProfileDoctor extends Component {
         let { dataScheduleTimeModal, isShowShortDesc } = this.props;
         let language = this.props.language;
         let { doctorInfo } = this.state;
+
         return (
             <Fragment>
                 <div className="doctor-info">
@@ -94,7 +95,8 @@ class ProfileDoctor extends Component {
                                         }
                                     </div>
                                     <div className="doctor-info__short-desc">
-                                        Mô tả: <br />
+                                        <FormattedMessage id="patient.booking-modal.booking-modal-form-desc" />
+                                        : <br />
                                         {
                                             doctorInfo
                                             && doctorInfo.Markdown
@@ -106,7 +108,7 @@ class ProfileDoctor extends Component {
                             ) : (
                                 <div className="doctor-info__booking">
                                     <div className="doctor-info__title">
-                                        Đặt lịch khám
+                                        <FormattedMessage id="patient.booking-modal.booking-modal-form-booking" />
                                     </div>
                                     <div className="doctor-info__specialty">
                                         {
@@ -130,7 +132,9 @@ class ProfileDoctor extends Component {
                                             )}
                                     </div>
                                     <div className="doctor-info__desc">
-                                        <span>Miễn phí đặt lịch</span>
+                                        <span>
+                                            <FormattedMessage id="patient.booking-modal.booking-modal-form-free-booking" />
+                                        </span>
                                     </div>
                                 </div>
                             )}
@@ -141,7 +145,8 @@ class ProfileDoctor extends Component {
                         <i className="fa-solid fa-square-check"></i>
                     </div>
                     <div className="doctor-price__right">
-                        Giá khám: &nbsp;
+                        <FormattedMessage id="patient.booking-modal.booking-modal-form-free-price" />
+                        : &nbsp;
                         {doctorInfo && doctorInfo.doctorData && doctorInfo.doctorData.priceTypeData && doctorInfo.doctorData.priceTypeData.valueEn && doctorInfo.doctorData.priceTypeData.valueVi &&
                             (
                                 LANGUAGES.VI === language ?

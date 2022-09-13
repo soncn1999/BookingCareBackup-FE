@@ -96,6 +96,20 @@
             "price": "Giá khám",
             "price-desc": "Được ưu tiên khám trước khi đặt khám qua BookingCare. Giá khám cho người nước ngoài là 30USD",
             "payment-desc": "Người bệnh có thể thanh toán chi phí bằng hình thức"
+        },
+        "booking-modal": {
+            "booking-modal-title": "Thông tin đặt lịch khám bệnh",
+            "booking-modal-form-fullname": "Họ tên",
+            "booking-modal-form-email": "Email",
+            "booking-modal-form-phonenumber": "Số điện thoại",
+            "booking-modal-form-address": "Địa chỉ liên hệ",
+            "booking-modal-form-gender": "Giới tính",
+            "booking-modal-form-dob": "Ngày sinh",
+            "booking-modal-form-reason": "Lý do khám",
+            "booking-modal-form-desc": "Mô tả",
+            "booking-modal-form-booking": "Đặt lịch khám bệnh",
+            "booking-modal-form-free-booking": "Miễn phí đặt lịch",
+            "booking-modal-form-free-price": "Giá khám"
         }
     },
     "admin": {
